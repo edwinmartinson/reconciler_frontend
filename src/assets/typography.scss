@@ -1,0 +1,157 @@
+@mixin font-style($ft-size, $ft-weight) {
+  font-size: #{$ft-size}px;
+  font-weight: $ft-weight;
+}
+
+// H1
+.ft-h1-light {
+  @include font-style(28.38, 300);
+}
+
+.ft-h1-regular {
+  @include font-style(28.38, 400);
+}
+
+.ft-h1-medium {
+  @include font-style(28.38, 500);
+}
+
+.ft-h1-semibold {
+  @include font-style(28.38, 600);
+}
+
+// H2
+.ft-h2-light {
+  @include font-style(25.23, 300);
+}
+
+.ft-h2-regular {
+  @include font-style(25.23, 400);
+}
+
+.ft-h2-medium {
+  @include font-style(25.23, 500);
+}
+
+.ft-h2-semibold {
+  @include font-style(25.23, 600);
+}
+
+// H3
+.ft-h3-light {
+  @include font-style(22.43, 300);
+}
+
+.ft-h3-regular {
+  @include font-style(22.43, 400);
+}
+
+.ft-h3-medium {
+  @include font-style(22.43, 500);
+}
+
+.ft-h3-semibold {
+  @include font-style(22.43, 600);
+}
+
+// H4
+.ft-h4-light {
+  @include font-style(19.93, 300);
+}
+
+.ft-h4-regular {
+  @include font-style(19.93, 400);
+}
+
+.ft-h4-medium {
+  @include font-style(19.93, 500);
+}
+
+.ft-h4-semibold {
+  @include font-style(19.93, 600);
+}
+
+// H5
+.ft-h5-light {
+  @include font-style(17.72, 300);
+}
+
+.ft-h5-regular {
+  @include font-style(17.72, 400);
+}
+
+.ft-h5-medium {
+  @include font-style(17.72, 500);
+}
+
+.ft-h5-semibold {
+  @include font-style(17.72, 600);
+}
+
+// H6
+.ft-h6-light {
+  @include font-style(15.75, 300);
+}
+
+.ft-h6-regular {
+  @include font-style(15.75, 400);
+}
+
+.ft-h6-medium {
+  @include font-style(15.75, 500);
+}
+
+.ft-h6-semibold {
+  @include font-style(15.75, 600);
+}
+
+// Paragraph
+.ft-p-light {
+  @include font-style(14, 300);
+}
+
+.ft-p-regular {
+  @include font-style(14, 400);
+}
+
+.ft-p-medium {
+  @include font-style(14, 500);
+}
+
+.ft-p-semibold {
+  @include font-style(14, 600);
+}
+
+// Txt
+.ft-txt-light {
+  @include font-style(12.44, 300);
+}
+
+.ft-txt-regular {
+  @include font-style(12.44, 400);
+}
+
+.ft-txt-medium {
+  @include font-style(12.44, 500);
+}
+
+.ft-txt-semibold {
+  @include font-style(12.44, 600);
+}
+
+// subtxt
+.ft-subtxt-light {
+  @include font-style(11.06, 300);
+}
+
+.ft-subtxt-regular {
+  @include font-style(11.06, 400);
+}
+
+.ft-subtxt-medium {
+  @include font-style(11.06, 500);
+}
+
+.ft-subtxt-semibold {
+  @include font-style(11.06, 600);
+}

@@ -1,0 +1,15 @@
+{
+  "short_name": "Recon Sys",
+  "name": "Banking Reconciliation System",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "24x24",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#6575f8",
+  "background_color": "#f9f9fd"
+}
