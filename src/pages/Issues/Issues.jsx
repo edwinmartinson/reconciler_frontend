@@ -2,20 +2,21 @@ import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import Message from "../../components/Message/Message";
 
-import "./Home.scss";
-import TransTableA from "./TransTableA";
-import Widgets from "./Widgets";
+import "./Issues.scss";
+import { Widgets } from "./Widgets";
+import TbSelection from "./TbSelection";
 
-export default function Home() {
+function Issues() {
   const { state } = useContext(AppContext);
   const ledgerId = state.ledgerId;
 
   return ledgerId !== "000000000000" ? (
     <main className="main">
       <Widgets />
+
       <div className="wrapper">
-        <TransTableA source={"core"} />
-        <TransTableA source={"party"} />
+        <TbSelection />
+        <TbSelection />
       </div>
     </main>
   ) : (
@@ -24,3 +25,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default Issues;

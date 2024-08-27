@@ -5,19 +5,37 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./assets/base.scss";
 import "./assets/typography.scss";
+import "./assets/table.scss";
 import "./main.scss";
 
-import Header from "./components/Header/Header";
+import AppWrapper from "./AppWrapper";
 import Home from "./pages/Home/Home";
+import Auth from "./pages/Auth/Auth";
+import Issues from "./pages/Issues/Issues";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <>
-        <Header />
+      <AppWrapper hideHeader={true}>
+        <Auth />
+      </AppWrapper>
+    ),
+  },
+  {
+    path: "/home",
+    element: (
+      <AppWrapper hideHeader={false}>
         <Home />
-      </>
+      </AppWrapper>
+    ),
+  },
+  {
+    path: "/issues",
+    element: (
+      <AppWrapper hideHeader={false}>
+        <Issues />
+      </AppWrapper>
     ),
   },
 ]);

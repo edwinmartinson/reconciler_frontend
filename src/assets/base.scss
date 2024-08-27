@@ -45,3 +45,9 @@
         color: var(--clr-primary-400);
     }
 }
+
+.flex-row-8 {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}

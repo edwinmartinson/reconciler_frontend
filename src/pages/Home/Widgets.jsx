@@ -1,10 +1,13 @@
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../context/AppContext";
+import useActions from "../../hooks/useActions";
+
 export default function Widgets() {
   return (
     <div className="widgets">
       <Countdown />
-      <ImportTracker />
+      <ImporterTracker />
       <ErrorTracker />
-      <OutstandingTrans />
       <AppActions />
     </div>
   );
@@ -123,26 +126,30 @@ function Countdown() {
   );
 }
 
-function ImportTracker() {
+function ImporterTracker() {
+  const { state } = useContext(AppContext);
+  const coreImporter = state.isCoreImportActive ? "active" : "inactive";
+  const partyImporter = state.isPartyImportActive ? "active" : "inactive";
+
   return (
     <div className="widget">
       <div className="wrapper">
         <WidgetIcons index={2} />
-        <h3 className="ft-h6-regular">Import tracker</h3>
+        <h3 className="ft-h6-regular">Importer tracker</h3>
       </div>
 
       <div className="wrapper space-between">
-        <h6 className="ft-h6-regular">Core import</h6>
-        <ImportStatusPile status={"inactive"} />
+        <h6 className="ft-h6-regular">Core importer</h6>
+        <ImportStatusPile status={coreImporter} />
       </div>
 
       <div className="wrapper space-between">
-        <h6 className="ft-h6-regular">Party import</h6>
-        <ImportStatusPile status={"complete"} />
+        <h6 className="ft-h6-regular">Party importer</h6>
+        <ImportStatusPile status={partyImporter} />
       </div>
 
       <p className="ft-txt-regular clr--gray">
-        Showing import status for today.
+        Showing current state of importers.
       </p>
     </div>
   );
@@ -153,7 +160,7 @@ function ImportStatusPile({ status }) {
     case "inactive":
       return (
         <div className="widget__import inactive">
-          <p className="ft-p-medium">Not started</p>
+          <p className="ft-p-medium">Inactive</p>
         </div>
       );
 
@@ -164,12 +171,8 @@ function ImportStatusPile({ status }) {
         </div>
       );
 
-    case "complete":
-      return (
-        <div className="widget__import complete">
-          <p className="ft-p-medium">Imported</p>
-        </div>
-      );
+    default:
+      throw new Error("Invalid status");
   }
 }
 
@@ -224,6 +227,92 @@ function OutstandingTrans() {
 }
 
 function AppActions() {
+  const { dispatch } = useContext(AppContext);
+  const {
+    error: iError,
+    hasResponded: iHasResponded,
+    message: iMessage,
+    doAction: iDoAction,
+  } = useActions("import");
+  const {
+    error: rError,
+    hasResponded: rHasResponded,
+    message: rMessage,
+    doAction: rDoAction,
+  } = useActions("recon");
+
+  useEffect(() => {
+    if (iHasResponded === true) onImportRes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [iHasResponded]);
+
+  useEffect(() => {
+    if (rHasResponded === true) onReconRes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rHasResponded]);
+
+  function onImportRes() {
+    return dispatch({
+      type: "updateDialog",
+      payload: {
+        show: true,
+        type: iError === true ? "error" : "success",
+        hideAction: true,
+        title:
+          iError === true
+            ? "Instant import failed."
+            : "Instant import initiated",
+        description: iMessage,
+        action: iDoAction,
+      },
+    });
+  }
+
+  function onReconRes() {
+    return dispatch({
+      type: "updateDialog",
+      payload: {
+        show: true,
+        type: rError === true ? "error" : "success",
+        hideAction: true,
+        title:
+          rError === true ? "Instant recon failed." : "Instant recon initiated",
+        description: rMessage,
+        action: rDoAction,
+      },
+    });
+  }
+
+  const handleImport = () => {
+    dispatch({
+      type: "updateDialog",
+      payload: {
+        show: true,
+        type: "default",
+        hideAction: false,
+        title: "Are you sure?",
+        description:
+          "Confirm this action to instantly import transactions from core source and third parties.",
+        action: iDoAction,
+      },
+    });
+  };
+
+  const handleRecon = () => {
+    dispatch({
+      type: "updateDialog",
+      payload: {
+        show: true,
+        type: "default",
+        hideAction: false,
+        title: "Are you sure?",
+        description:
+          "Confirm this action to instantly reconcile imported transactions.",
+        action: rDoAction,
+      },
+    });
+  };
+
   return (
     <div className="widget">
       <div className="wrapper">
@@ -233,12 +322,12 @@ function AppActions() {
 
       <div className="wrapper space-between">
         <h6 className="ft-h6-regular">Instant import</h6>
-        <AppActionBtn />
+        <AppActionBtn action={handleImport} />
       </div>
 
       <div className="wrapper space-between">
         <h6 className="ft-h6-regular">Instant recon</h6>
-        <AppActionBtn />
+        <AppActionBtn action={handleRecon} />
       </div>
 
       <p className="ft-txt-regular clr--gray">
@@ -248,9 +337,9 @@ function AppActions() {
   );
 }
 
-function AppActionBtn() {
+function AppActionBtn({ action }) {
   return (
-    <div className="widget__action">
+    <div className="widget__action" onClick={() => action()}>
       <p className="ft-p-medium">Activate</p>
     </div>
   );

@@ -1,0 +1,27 @@
+.button {
+    min-width: 80px;
+    padding: 4px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 8px;
+
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.6;
+    }
+
+    &.outlined {
+        border: 1px solid var(--clr-black-300);
+
+    }
+
+    &.filled {
+        color: var(--clr-white-100);
+        background: var(--clr-black-300);
+    }
+}

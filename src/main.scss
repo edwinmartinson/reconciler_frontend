@@ -1,6 +1,5 @@
 html,
-body,
-#root {
+body {
     height: 100%;
 }
 
@@ -22,4 +21,41 @@ body {
 
 a {
     text-decoration: none;
+}
+
+// Main
+.main {
+    margin: 16px auto 0px auto;
+    padding-bottom: 16px;
+    max-width: 1440px;
+    min-height: calc(100vh - 56px - 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    position: relative;
+
+    &.center {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .wrapper {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+    }
+}
+
+@media screen and (max-width: 1488px) {
+    .main {
+        padding: 0px 16px;
+    }
+
+}
+
+@media screen and (max-width: 1088px) {
+    .main>.wrapper {
+        flex-direction: column;
+    }
 }
