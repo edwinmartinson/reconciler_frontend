@@ -3,7 +3,7 @@ import { AppContext } from "../../context/AppContext";
 import Message from "../../components/Message/Message";
 
 import "./Home.scss";
-import TransTableA from "./TransTableA";
+import TransTable from "./TransTable";
 import Widgets from "./Widgets";
 
 export default function Home() {
@@ -14,8 +14,8 @@ export default function Home() {
     <main className="main">
       <Widgets />
       <div className="wrapper">
-        <TransTableA source={"core"} />
-        <TransTableA source={"party"} />
+        <TransTable source={"core"} />
+        <TransTable source={"party"} />
       </div>
     </main>
   ) : (

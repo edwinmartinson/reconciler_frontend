@@ -16,22 +16,25 @@
     border: 1px solid var(--clr-back-000);
     background: var(--clr-white-100);
 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: "----";
+
     &.row {
         flex-direction: row;
         justify-content: space-between;
     }
 
-    &:first-of-type,
-    &:nth-of-type(3) {
-        .wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            align-self: stretch;
-        }
+
+    .wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
     }
 
-    &:nth-of-type(2) {
+
+    &:last-of-type {
         .wrapper {
             display: flex;
             flex-direction: column;
@@ -69,6 +72,66 @@
 
 }
 
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+    }
+
+    &__filter {
+        display: flex;
+        flex-shrink: 1;
+        width: 300px;
+        padding: 8px 12px;
+        align-items: center;
+        gap: 8px;
+        border-radius: 8px;
+
+        background: var(--clr-white-100);
+
+        span {
+            display: flex;
+        }
+
+        .field {
+            background-color: var(--clr-black-000);
+        }
+
+        &.sm {
+            width: 140px;
+        }
+
+        &.md {
+            width: 200px;
+        }
+    }
+}
+
+.selection {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+
+    &__col {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 688px;
+    }
+
+    .table__container {
+        width: unset;
+    }
+}
+
 
 @media screen and (max-width: 1240px) {
     .issue-widget:nth-of-type(3) {
@@ -76,3 +139,43 @@
 
     }
 }
+
+@media screen and (max-width: 1088px) {
+    .filters {
+        flex-direction: column;
+        gap: 8px;
+
+        &__wrapper {
+            width: 100%;
+
+        }
+
+        &__filter,
+        &__filter.sm,
+        &__filter.md {
+            width: 100%;
+
+            .field {
+                width: 100%;
+            }
+        }
+    }
+
+    .selection {
+        flex-direction: column;
+
+        &__col {
+            width: 100%;
+        }
+    }
+}
+
+// @media screen and (max-width: 980px) {
+//     .issue-widgets {
+//         flex-direction: column;
+//     }
+
+//     .issue-widget {
+//         width: 100%;
+//     }
+// }

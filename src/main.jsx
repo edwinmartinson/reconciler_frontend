@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./assets/base.scss";
 import "./assets/typography.scss";
 import "./assets/table.scss";
+import "./assets/fields.scss";
 import "./main.scss";
 
 import AppWrapper from "./AppWrapper";

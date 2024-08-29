@@ -48,6 +48,11 @@
     }
 }
 
+.table-body.max-height {
+    max-height: 800px;
+    overflow-y: scroll;
+}
+
 @media screen and (max-width: 1088px) {
     .table__container {
         width: calc(100% - 32px);

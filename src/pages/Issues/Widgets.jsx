@@ -1,25 +1,56 @@
 export function Widgets() {
   return (
     <div className="issue-widgets">
-      <BalanceTracker />
+      <DataWidgetT1
+        label={"Outstanding trans"}
+        value={"00"}
+        desc={"Showing current number of outstanding trans."}
+      />
+      <DataWidgetT2
+        dataObjA={{
+          label: "Core total",
+          value: "00.00",
+        }}
+        dataObjB={{
+          label: "Party total",
+          value: "00.00",
+        }}
+      />
+      <DataWidgetT1
+        label={"Total balance"}
+        value={"00.00"}
+        desc={"Showing balance of selected transactions."}
+      />
       <ManualRecon />
-      <OutsandingTrans />
-      <SortTrans />
     </div>
   );
 }
 
-function BalanceTracker() {
+function DataWidgetT1({ label, value, desc }) {
   return (
     <div className="issue-widget">
       <div className="wrapper">
-        <p className="ft-h6-regular">Balance</p>
-        <p className="ft-h3-medium">00.00</p>
+        <p className="ft-h6-regular">{label}</p>
+        <p className="ft-h3-medium">{value}</p>
       </div>
 
-      <p className="ft-txt-regular clr--gray">
-        Showing balance of selected transactions.
-      </p>
+      <p className="ft-txt-regular clr--gray">{desc}</p>
+    </div>
+  );
+}
+
+function DataWidgetT2({ dataObjA, dataObjB }) {
+  return (
+    <div className="issue-widget">
+      <div className="wrapper">
+        <p className="ft-h6-regular">{dataObjA.label}</p>
+        <p className="ft-h3-medium">{dataObjA.value}</p>
+      </div>
+
+      <div className="wrapper">
+        <p className="ft-h6-regular">{dataObjB.label}</p>
+        <p className="ft-h3-medium">{dataObjB.value}</p>
+      </div>
     </div>
   );
 }
@@ -42,36 +73,6 @@ function ManualRecon() {
           />
         </svg>
       </span>
-    </div>
-  );
-}
-
-function OutsandingTrans() {
-  return (
-    <div className="issue-widget">
-      <div className="wrapper">
-        <p className="ft-h6-regular">Outstanding trans</p>
-        <p className="ft-h3-medium">00</p>
-      </div>
-
-      <p className="ft-txt-regular clr--gray">
-        Showing current number of outstanding trans.
-      </p>
-    </div>
-  );
-}
-
-function SortTrans() {
-  return (
-    <div className="issue-widget">
-      <select className="field sort" name="#" id="sort">
-        <option value="pm">Partially Matched</option>
-        <option value="mm">Mismatched Matched</option>
-      </select>
-
-      <p className="ft-txt-regular clr--gray">
-        Specify the kind of outstanding trans to display.
-      </p>
     </div>
   );
 }
