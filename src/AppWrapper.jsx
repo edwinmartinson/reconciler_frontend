@@ -1,6 +1,6 @@
-import ActionDialog from "./components/Dialog/ActionDialog";
-import Header from "./components/Header/Header";
-import Loader from "./components/Loader/Loader";
+import ActionDialog from "./components/ActionDialog";
+import Header from "./components/Header";
+import Loader from "./components/Loader";
 
 function AppWrapper({ hideHeader, children }) {
   return (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Pagination from "../../components/Pagination/Pagination";
-import TableToggle from "../../components/TableToggle/TableToggle";
+import Pagination from "../../../components/Pagination";
+import TableToggle from "../../../components/TableToggle";
 
 export default function SelectTable({ source }) {
   const [isOpen, setIsOpen] = useState(true);

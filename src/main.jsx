@@ -5,12 +5,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./assets/base.scss";
 import "./assets/typography.scss";
-import "./assets/table.scss";
-import "./assets/fields.scss";
-import "./main.scss";
+import "./assets/layout.scss";
+import "./assets/components.scss";
 
 import AppWrapper from "./AppWrapper";
-import Home from "./pages/Home/Home";
+import Source from "./pages/Source/Source";
 import Auth from "./pages/Auth/Auth";
 import Issues from "./pages/Issues/Issues";
 
@@ -24,10 +23,10 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/home",
+    path: "/source",
     element: (
       <AppWrapper hideHeader={false}>
-        <Home />
+        <Source />
       </AppWrapper>
     ),
   },
@@ -47,5 +46,5 @@ root.render(
     <AppContextProvider>
       <RouterProvider router={router} />
     </AppContextProvider>
-  </StrictMode>
+  </StrictMode>,
 );

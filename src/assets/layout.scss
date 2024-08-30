@@ -8,7 +8,6 @@ body {
     padding: 0;
 }
 
-// layout
 body {
     background-color: var(--clr-background);
     color: var(--clr-black-300);
@@ -44,8 +43,6 @@ a {
         display: flex;
         align-items: flex-start;
         gap: 16px;
-
-
     }
 }
 
@@ -53,11 +50,10 @@ a {
     .main {
         padding: 0px 16px;
     }
-
 }
 
 @media screen and (max-width: 1088px) {
-    .main>.wrapper {
+    .main > .wrapper {
         flex-direction: column;
     }
 }

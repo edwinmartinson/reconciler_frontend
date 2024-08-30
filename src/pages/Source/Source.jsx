@@ -1,12 +1,11 @@
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-import Message from "../../components/Message/Message";
+import Message from "../../components/Message";
 
-import "./Home.scss";
-import TransTable from "./TransTable";
-import Widgets from "./Widgets";
+import TransTable from "./components/TransTable";
+import Widgets from "./components/Widgets";
 
-export default function Home() {
+export default function Source() {
   const { state } = useContext(AppContext);
   const ledgerId = state.ledgerId;
 

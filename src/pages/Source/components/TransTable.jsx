@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useTrans, useTransStream } from "../../hooks/useTrans";
-import Pagination from "../../components/Pagination/Pagination";
-import TableToggle from "../../components/TableToggle/TableToggle";
+import { useTrans, useTransStream } from "../../../hooks/useTrans";
+import Pagination from "../../../components/Pagination";
+import TableToggle from "../../../components/TableToggle";
 
 export default function TransTable({ source }) {
   const { trans, getTrans } = useTrans("pending", 200);

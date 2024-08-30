@@ -1,8 +1,7 @@
-import "./Header.scss";
 import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
-import useAccounts from "../../hooks/useAccounts";
-import useAppStateSteam from "../../hooks/useAppStateStream";
+import { AppContext } from "../context/AppContext";
+import useAccounts from "../hooks/useAccounts";
+import useAppStateSteam from "../hooks/useAppStateStream";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
@@ -19,7 +18,7 @@ export default function Header() {
           </Title>
 
           <div className="navlinks">
-            <NavLink label={"Home"} path={"/home"} />
+            <NavLink label={"Source"} path={"/source"} />
             <NavLink label={"Issues"} path={"/issues"} />
             <NavLink label={"Config"} path={"/config"} />
             <NavLink label={"Logs"} path={"/logs"} />

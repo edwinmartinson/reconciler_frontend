@@ -1,12 +1,11 @@
-import "./Issues.scss";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-import { Widgets } from "./Widgets";
-import Message from "../../components/Message/Message";
+import { Widgets } from "./components/Widgets";
+import Message from "../../components/Message";
 
-import SelectedTable from "./SelectedTable";
-import Filters from "./Filters";
-import SelectTable from "./SelectTable";
+import SelectedTable from "./components/SelectedTable";
+import Filters from "./components/Filters";
+import SelectTable from "./components/SelectTable";
 
 function Issues() {
   const { state } = useContext(AppContext);

@@ -18,7 +18,7 @@ export function getEndpoint(key) {
       return endpoint + "/api/actions";
 
     case "trans:stream":
-      return endpoint + "/api/trans/stream";
+      return endpoint + "/api/trans/source/stream";
 
     case "state:stream":
       return endpoint + "/api/state/stream";

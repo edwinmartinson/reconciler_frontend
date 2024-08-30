@@ -1,4 +1,3 @@
-import "./Pagination.scss";
 import PropTypes from "prop-types";
 
 Pagination.propTypes = {

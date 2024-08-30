@@ -1,8 +1,7 @@
 import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
+import { AppContext } from "../context/AppContext";
 
-import "./ActionDialog.scss";
-import Button from "../Buttons/Button";
+import Button from "./Button";
 
 function ActionDialog() {
   const { state, dispatch } = useContext(AppContext);

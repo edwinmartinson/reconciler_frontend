@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
-import { AppContext } from "../../context/AppContext";
-import useActions from "../../hooks/useActions";
+import { AppContext } from "../../../context/AppContext";
+import useActions from "../../../hooks/useActions";
 
 export default function Widgets() {
   return (

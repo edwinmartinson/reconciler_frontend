@@ -1,6 +1,5 @@
 import { useContext } from "react";
-import "./Loader.scss";
-import { AppContext } from "../../context/AppContext";
+import { AppContext } from "../context/AppContext";
 
 function Loader() {
   const { state } = useContext(AppContext);

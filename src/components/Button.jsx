@@ -1,5 +1,3 @@
-import "./Button.scss";
-
 function Button({ type, actions, children }) {
   switch (type) {
     case "filled":
