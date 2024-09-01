@@ -10,17 +10,20 @@ import "./assets/components.scss";
 
 import AppWrapper from "./AppWrapper";
 import Source from "./pages/Source/Source";
-import Auth from "./pages/Auth/Auth";
 import Issues from "./pages/Issues/Issues";
+import U404 from "./pages/Utility/404";
+import Error from "./pages/Utility/Error";
+import Dev from "./pages/Utility/Dev";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <AppWrapper hideHeader={true}>
-        <Auth />
+        <Dev page={"Login"} />
       </AppWrapper>
     ),
+    errorElement: <Error />,
   },
   {
     path: "/source",
@@ -29,6 +32,7 @@ const router = createBrowserRouter([
         <Source />
       </AppWrapper>
     ),
+    errorElement: <Error />,
   },
   {
     path: "/issues",
@@ -37,6 +41,34 @@ const router = createBrowserRouter([
         <Issues />
       </AppWrapper>
     ),
+    errorElement: <Error />,
+  },
+  {
+    path: "/config",
+    element: (
+      <AppWrapper hideHeader={false}>
+        <Dev page={"Config"} />
+      </AppWrapper>
+    ),
+    errorElement: <Error />,
+  },
+  {
+    path: "/logs",
+    element: (
+      <AppWrapper hideHeader={false}>
+        <Dev page={"Logs"} />
+      </AppWrapper>
+    ),
+    errorElement: <Error />,
+  },
+  {
+    path: "*",
+    element: (
+      <AppWrapper hideHeader={false}>
+        <U404 />
+      </AppWrapper>
+    ),
+    errorElement: <Error />,
   },
 ]);
 
@@ -46,5 +78,5 @@ root.render(
     <AppContextProvider>
       <RouterProvider router={router} />
     </AppContextProvider>
-  </StrictMode>,
+  </StrictMode>
 );

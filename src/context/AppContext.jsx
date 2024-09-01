@@ -2,6 +2,7 @@ import { createContext, useReducer } from "react";
 
 const initialState = {
   ledgerId: "000000000000",
+  isConnected: false,
   isCoreImportActive: false,
   isPartyImportActive: false,
   isReconActive: false,
@@ -49,6 +50,13 @@ const reducer = (state, action) => {
         isPartyImportActive: action.payload.isPartyImportActive,
         isReconActive: action.payload.isReconActive,
         isAutoReconActive: action.payload.isAutoReconActive,
+      };
+    }
+
+    case "updateIsConnected": {
+      return {
+        ...state,
+        isConnected: action.payload,
       };
     }
 

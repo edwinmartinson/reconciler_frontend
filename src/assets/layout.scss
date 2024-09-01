@@ -39,6 +39,12 @@ a {
         justify-content: center;
     }
 
+    &.error {
+        min-height: unset;
+        margin: 0px;
+        height: 100vh;
+    }
+
     .wrapper {
         display: flex;
         align-items: flex-start;
@@ -53,7 +59,7 @@ a {
 }
 
 @media screen and (max-width: 1088px) {
-    .main > .wrapper {
+    .main>.wrapper {
         flex-direction: column;
     }
 }

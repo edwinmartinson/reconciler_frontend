@@ -6,9 +6,9 @@ export default function Widgets() {
   return (
     <div className="widgets">
       <Countdown />
-      <ImporterTracker />
-      <ErrorTracker />
+      <AppStates />
       <AppActions />
+      <ErrorTracker />
     </div>
   );
 }
@@ -126,36 +126,40 @@ function Countdown() {
   );
 }
 
-function ImporterTracker() {
+function AppStates() {
   const { state } = useContext(AppContext);
-  const coreImporter = state.isCoreImportActive ? "active" : "inactive";
-  const partyImporter = state.isPartyImportActive ? "active" : "inactive";
+  const isReconcilerActive = state.isReconActive ? "active" : "inactive";
+
+  const isImporterActive = () => {
+    const result = state.isCoreImportActive || state.isPartyImportActive;
+    return result ? "active" : "inactive";
+  };
 
   return (
     <div className="widget">
       <div className="wrapper">
         <WidgetIcons index={2} />
-        <h3 className="ft-h6-regular">Importer tracker</h3>
+        <h3 className="ft-h6-regular">App states</h3>
       </div>
 
       <div className="wrapper space-between">
-        <h6 className="ft-h6-regular">Core importer</h6>
-        <ImportStatusPile status={coreImporter} />
+        <h6 className="ft-h6-regular">Trans Importer</h6>
+        <AppStatePile status={isImporterActive()} />
       </div>
 
       <div className="wrapper space-between">
-        <h6 className="ft-h6-regular">Party importer</h6>
-        <ImportStatusPile status={partyImporter} />
+        <h6 className="ft-h6-regular">Trans reconciler</h6>
+        <AppStatePile status={isReconcilerActive} />
       </div>
 
       <p className="ft-txt-regular clr--gray">
-        Showing current state of importers.
+        Showing the state of core modules.
       </p>
     </div>
   );
 }
 
-function ImportStatusPile({ status }) {
+function AppStatePile({ status }) {
   switch (status) {
     case "inactive":
       return (
@@ -196,31 +200,6 @@ function ErrorTracker() {
 
       <p className="ft-txt-regular clr--gray">
         Showing error count for last run.
-      </p>
-    </div>
-  );
-}
-
-function OutstandingTrans() {
-  return (
-    <div className="widget">
-      <div className="wrapper">
-        <WidgetIcons index={4} />
-        <h3 className="ft-h6-regular">Outstanding</h3>
-      </div>
-
-      <div className="wrapper space-between">
-        <h6 className="ft-h6-regular">Core transactions</h6>
-        <h6 className="ft-h3-medium clr--gray">00</h6>
-      </div>
-
-      <div className="wrapper space-between">
-        <h6 className="ft-h6-regular">Party transactions</h6>
-        <h6 className="ft-h3-medium clr--red">02</h6>
-      </div>
-
-      <p className="ft-txt-regular clr--gray">
-        Showing current outstanding trans.
       </p>
     </div>
   );

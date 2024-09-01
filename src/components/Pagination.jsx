@@ -12,8 +12,8 @@ function Pagination({ numPages, activePage, onPage }) {
       {Array.from({ length: numPages }, (_, i) => (
         <div
           key={i}
-          className={`page ${i === activePage ? "active" : "inactive"}`}
-          onClick={() => onPage(i)}
+          className={`page ${i + 1 === activePage ? "active" : "inactive"}`}
+          onClick={() => onPage(i + 1)}
         >
           <p className="ft-txt-medium">{i + 1}</p>
         </div>

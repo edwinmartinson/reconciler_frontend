@@ -12,15 +12,11 @@ function useAppStateSteam() {
 
       eventSource.onmessage = (event) => {
         const parsedData = JSON.parse(event.data);
-
-        dispatch({
-          type: "updateAppState",
-          payload: parsedData,
-        });
+        dispatch({ type: "updateAppState", payload: parsedData });
       };
 
       eventSource.onerror = (err) => {
-        setError(`SSE connection error: ${err}`);
+        setError(true);
         eventSource.close();
       };
 

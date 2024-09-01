@@ -9,6 +9,19 @@ export default function TransTable({ source }) {
   const [isOpen, setIsOpen] = useState(true);
   const [activePage, setActivePage] = useState(1);
 
+  const isEmpty = (source) => {
+    const coreLength = trans?.fromCore.length;
+    const partyLength = trans?.fromParty.length;
+
+    switch (source) {
+      case "core":
+        return coreLength === 0 || coreLength == undefined;
+
+      case "party":
+        return partyLength === 0 || partyLength == undefined;
+    }
+  };
+
   const colorClass = (amount) => {
     const theAmount = Number.parseFloat(amount);
     return theAmount > 0 ? "clr--green" : "clr--red";
@@ -77,6 +90,19 @@ export default function TransTable({ source }) {
                   </tr>
                 ))}
           </tbody>
+          <tfoot>
+            {isEmpty(source) ? (
+              <tr>
+                <td colSpan={4}>
+                  <div>
+                    <p className="ft-p-regular clr--gray">No transactions</p>
+                  </div>
+                </td>
+              </tr>
+            ) : (
+              <></>
+            )}
+          </tfoot>
         </table>
       ) : (
         <></>
