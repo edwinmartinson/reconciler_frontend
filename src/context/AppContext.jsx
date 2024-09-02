@@ -14,6 +14,7 @@ const initialState = {
     coreTotal: 0,
     partyTotal: 0,
     count: 0,
+    coreRef: "",
   },
   dialog: {
     show: false,

@@ -1,6 +1,6 @@
 /**
  * Returns backend api endpoints
- * @param {"accts" | "trans" | "actions" | "trans:stream | "state:stream" | "connect:stream"} key
+ * @param {"accts" | "trans" | "actions" | "manual" | "trans:stream | "state:stream" | "connect:stream"} key
  * @returns {string}
  */
 
@@ -22,6 +22,9 @@ export function getEndpoint(key) {
 
     case "trans":
       return endpoint + "/api/trans";
+
+    case "manual":
+      return endpoint + "/api/manual";
 
     case "source:stream":
       return endpoint + "/api/trans/source/stream";

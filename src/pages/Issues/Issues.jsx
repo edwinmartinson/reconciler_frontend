@@ -4,9 +4,10 @@ import { Widgets } from "./components/Widgets";
 import Message from "../../components/Message";
 
 import SelectedTable from "./components/SelectedTable";
-import Filters from "./components/Filters";
+// import Filters from "./components/Filters";
 import SelectTable from "./components/SelectTable";
 import { useTrans, useTransStream } from "../../hooks/useTrans";
+import useIssues from "../../hooks/useIssues";
 
 function Issues() {
   const { state } = useContext(AppContext);
@@ -15,7 +16,7 @@ function Issues() {
   return ledgerId !== "000000000000" ? (
     <main className="main">
       <Widgets />
-      <Filters />
+      {/* <Filters /> */}
       <Selection />
     </main>
   ) : (
@@ -26,9 +27,10 @@ function Issues() {
 }
 
 function Selection() {
-  const { state, dispatch } = useContext(AppContext);
   const { trans, getTrans } = useTrans("issues", 200);
   const { changeTime } = useTransStream("issues");
+
+  useIssues(trans?.fromCore, trans?.fromParty);
 
   const isEmpty = (source) => {
     const coreLength = trans?.fromCore.length;
@@ -42,40 +44,6 @@ function Selection() {
         return partyLength === 0 || partyLength == undefined;
     }
   };
-
-  useEffect(() => {
-    const selectedCoreTrans = state.issues.selectedCoreTrans;
-    const selectedPartyTrans = state.issues.selectedPartyTrans;
-
-    const filteredCoreTrans = trans?.fromCore.filter((trans) =>
-      selectedCoreTrans.includes(trans.id)
-    );
-    const filteredPartyTrans = trans?.fromParty.filter((trans) =>
-      selectedPartyTrans.includes(trans.id)
-    );
-
-    const coreTotal = filteredCoreTrans?.reduce((pre, cur) => {
-      return pre + Number.parseFloat(cur.details.amount);
-    }, 0);
-    const partyTotal = filteredPartyTrans?.reduce((pre, cur) => {
-      return pre + Number.parseFloat(cur.details.amount);
-    }, 0);
-
-    const handleTotal = (coreTotal, partyTotal) => {
-      dispatch({
-        type: "updateIssues",
-        payload: { coreTotal, partyTotal },
-      });
-    };
-
-    handleTotal(coreTotal, partyTotal);
-  }, [
-    dispatch,
-    state.issues.selectedCoreTrans,
-    state.issues.selectedPartyTrans,
-    trans?.fromCore,
-    trans?.fromParty,
-  ]);
 
   useEffect(() => {
     getTrans();
