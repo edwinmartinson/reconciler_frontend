@@ -4,7 +4,7 @@ import { AppContext } from "../context/AppContext";
 
 /**
  * React hook for getting transactions.
- * @param {"pending" | "issues" | "archive"} mode
+ * @param {"source" | "issues" | "archive"} mode
  * @param {number} limit
  * @returns {object}
  */
@@ -41,26 +41,51 @@ export function useTrans(mode, limit = 100) {
 
 /**
  * Listens for changes in transaction tables.
- * @param {"pending" | "issues" | "archive"} mode
+ * @param {"source" | "issues" | "archive"} mode
  * @returns {object}
  */
 export function useTransStream(mode) {
   const [error, setError] = useState(false);
   const [changeTime, setChangeTime] = useState(0);
 
-  const { state } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
   const ledgerId = state.ledgerId;
 
   useEffect(() => {
     try {
       const query = `?mode=${mode}&ledgerId=${ledgerId}`;
-      const eventSource = new EventSource(getEndpoint("trans:stream") + query);
+      const eventSource = new EventSource(
+        getEndpoint(`${mode}:stream`) + query
+      );
 
       eventSource.onmessage = (event) => {
         const parsedData = JSON.parse(event.data);
 
-        if (parsedData?.changeInCore || parsedData?.changeInParty) {
-          setChangeTime(parsedData?.timestamp);
+        switch (mode) {
+          case "source":
+            if (parsedData?.changeInCore || parsedData?.changeInParty) {
+              setChangeTime(parsedData?.timestamp);
+            }
+            break;
+
+          case "issues":
+            dispatch({
+              type: "updateIssues",
+              payload: {
+                count: parsedData?.count,
+              },
+            });
+
+            if (parsedData?.changeInIssues) {
+              setChangeTime(parsedData?.timestamp);
+            }
+            break;
+
+          case "archive":
+            throw new Error("Archive not yet implemented.");
+
+          default:
+            throw new Error("Invalid mode.");
         }
       };
 

@@ -11,6 +11,9 @@ export function getEndpoint(key) {
     case "connect:stream":
       return endpoint + "/api/connect/stream";
 
+    case "countdown:stream":
+      return endpoint + "/api/countdown/stream";
+
     case "actions":
       return endpoint + "/api/actions";
 
@@ -20,8 +23,11 @@ export function getEndpoint(key) {
     case "trans":
       return endpoint + "/api/trans";
 
-    case "trans:stream":
+    case "source:stream":
       return endpoint + "/api/trans/source/stream";
+
+    case "issues:stream":
+      return endpoint + "/api/trans/issues/stream";
 
     case "state:stream":
       return endpoint + "/api/state/stream";

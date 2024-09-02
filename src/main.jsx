@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <AppWrapper hideHeader={true}>
+      <AppWrapper hideHeader={false}>
         <Dev page={"Login"} />
       </AppWrapper>
     ),

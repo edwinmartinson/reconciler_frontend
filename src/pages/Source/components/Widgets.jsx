@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../../context/AppContext";
 import useActions from "../../../hooks/useActions";
+import useCountdown from "../../../hooks/useCountdown";
 
 export default function Widgets() {
   return (
@@ -111,6 +112,8 @@ function WidgetIcons({ index }) {
 }
 
 function Countdown() {
+  const [timeLeft] = useCountdown();
+
   return (
     <div className="widget">
       <div className="wrapper">
@@ -118,7 +121,7 @@ function Countdown() {
         <h3 className="ft-h6-regular">Countdown</h3>
       </div>
 
-      <h1 className="ft-h1-regular">2hrs 3min 24s</h1>
+      <h1 className="ft-h1-regular">{timeLeft}</h1>
       <p className="ft-txt-regular clr--gray">
         Time left till next auto reconciliation.
       </p>

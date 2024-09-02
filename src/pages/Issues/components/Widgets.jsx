@@ -1,24 +1,34 @@
+import { useContext } from "react";
+import { AppContext } from "../../../context/AppContext";
+import formatAmount from "../../../utils/formatNumber";
+
 export function Widgets() {
+  const { state } = useContext(AppContext);
+
+  const count = state.issues.count;
+  const coreTotal = state.issues.coreTotal;
+  const partyTotal = state.issues.partyTotal;
+
   return (
     <div className="issue-widgets">
       <DataWidgetT1
         label={"Outstanding trans"}
-        value={"00"}
+        value={count}
         desc={"Showing current number of outstanding trans."}
       />
       <DataWidgetT2
         dataObjA={{
           label: "Core total",
-          value: "00.00",
+          value: coreTotal,
         }}
         dataObjB={{
           label: "Party total",
-          value: "00.00",
+          value: partyTotal,
         }}
       />
-      <DataWidgetT1
+      <DataWidgetT3
         label={"Total balance"}
-        value={"00.00"}
+        value={coreTotal + partyTotal}
         desc={"Showing balance of selected transactions."}
       />
       <ManualRecon />
@@ -44,13 +54,26 @@ function DataWidgetT2({ dataObjA, dataObjB }) {
     <div className="issue-widget">
       <div className="wrapper">
         <p className="ft-h6-regular">{dataObjA.label}</p>
-        <p className="ft-h3-medium">{dataObjA.value}</p>
+        <p className="ft-h3-medium">{formatAmount(dataObjA.value || 0)}</p>
       </div>
 
       <div className="wrapper">
         <p className="ft-h6-regular">{dataObjB.label}</p>
-        <p className="ft-h3-medium">{dataObjB.value}</p>
+        <p className="ft-h3-medium">{formatAmount(dataObjB.value || 0)}</p>
       </div>
+    </div>
+  );
+}
+
+function DataWidgetT3({ label, value, desc }) {
+  return (
+    <div className="issue-widget">
+      <div className="wrapper">
+        <p className="ft-h6-regular">{label}</p>
+        <p className="ft-h3-medium">{formatAmount(value || 0)}</p>
+      </div>
+
+      <p className="ft-txt-regular clr--gray">{desc}</p>
     </div>
   );
 }

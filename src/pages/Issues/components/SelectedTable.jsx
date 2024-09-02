@@ -1,4 +1,30 @@
-function SelectedTable() {
+import { useContext } from "react";
+import { AppContext } from "../../../context/AppContext";
+
+function SelectedTable({ source, transArr }) {
+  const { state } = useContext(AppContext);
+  const selectedCoreTrans = state.issues.selectedCoreTrans;
+  const selectedPartyTrans = state.issues.selectedPartyTrans;
+
+  const sourcePack = (source) => {
+    switch (source) {
+      case "core":
+        return {
+          selectedTrans: selectedCoreTrans,
+        };
+
+      case "party":
+        return {
+          selectedTrans: selectedPartyTrans,
+        };
+    }
+  };
+
+  const { selectedTrans: selectedTransNo } = sourcePack(source);
+  const selectedTrans = transArr.filter((trans) =>
+    selectedTransNo.includes(trans.id)
+  );
+
   return (
     <div className="table__container center-head">
       <svg width="40" height="4" viewBox="0 0 40 4" fill="none">
@@ -17,19 +43,28 @@ function SelectedTable() {
           </tr>
         </thead>
         <tbody className="table-body">
-          <tr>
-            <td>12/01/2024</td>
-            <td>SLCSLR1800015297</td>
-            <td>RTGS-TRANS FUNDS TRANSFER</td>
-            <td>-4531791.20</td>
-          </tr>
-          <tr>
-            <td>12/01/2024</td>
-            <td>SLCSLR1800015297</td>
-            <td>RTGS-TRANS FUNDS TRANSFER</td>
-            <td>-4531791.20</td>
-          </tr>
+          {selectedTrans.map((trans, index) => (
+            <tr key={index}>
+              <td>{trans.details.postDate}</td>
+              <td>{trans.refId}</td>
+              <td>{trans.details.details}</td>
+              <td>{trans.details.amount}</td>
+            </tr>
+          ))}
         </tbody>
+        <tfoot>
+          {selectedTrans.length === 0 ? (
+            <tr>
+              <td colSpan={4}>
+                <div>
+                  <p className="ft-p-regular clr--gray">No transactions</p>
+                </div>
+              </td>
+            </tr>
+          ) : (
+            <></>
+          )}
+        </tfoot>
       </table>
     </div>
   );

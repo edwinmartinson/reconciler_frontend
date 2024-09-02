@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import useAccounts from "../hooks/useAccounts";
 import useConnect from "../hooks/useConnect";
-import useAppStateSteam from "../hooks/useAppStateStream";
+import useAppStateSteam from "../hooks/useAppState";
 
 export default function Header() {
   const { accts } = useAccounts();

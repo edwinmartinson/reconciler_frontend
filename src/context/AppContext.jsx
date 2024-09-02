@@ -8,6 +8,13 @@ const initialState = {
   isReconActive: false,
   isAutoReconActive: false,
   showAppLoader: false,
+  issues: {
+    selectedCoreTrans: [],
+    selectedPartyTrans: [],
+    coreTotal: 0,
+    partyTotal: 0,
+    count: 0,
+  },
   dialog: {
     show: false,
     type: "default",
@@ -57,6 +64,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         isConnected: action.payload,
+      };
+    }
+
+    case "updateIssues": {
+      return {
+        ...state,
+        issues: {
+          ...state.issues,
+          ...action.payload,
+        },
       };
     }
 

@@ -4,8 +4,8 @@ import Pagination from "../../../components/Pagination";
 import TableToggle from "../../../components/TableToggle";
 
 export default function TransTable({ source }) {
-  const { trans, getTrans } = useTrans("pending", 200);
-  const { changeTime } = useTransStream("pending");
+  const { trans, getTrans } = useTrans("source", 200);
+  const { changeTime } = useTransStream("source");
   const [isOpen, setIsOpen] = useState(true);
   const [activePage, setActivePage] = useState(1);
 
