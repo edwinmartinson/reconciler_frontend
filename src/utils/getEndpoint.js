@@ -21,16 +21,16 @@ export function getEndpoint(key) {
       return endpoint + "/api/accts";
 
     case "trans":
-      return endpoint + "/api/trans";
+      return endpoint + "/api/v1/trans";
 
     case "manual":
       return endpoint + "/api/manual";
 
     case "source:stream":
-      return endpoint + "/api/trans/source/stream";
+      return endpoint + "/api/v1/trans/source/stream";
 
     case "issues:stream":
-      return endpoint + "/api/trans/issues/stream";
+      return endpoint + "/api/v1/trans/issues/stream";
 
     case "state:stream":
       return endpoint + "/api/state/stream";

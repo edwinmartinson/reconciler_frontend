@@ -36,10 +36,10 @@ function SelectedTable({ source, transArr }) {
       <table className="table">
         <thead>
           <tr>
-            <th className="ft-p-medium clr--gray">Date</th>
-            <th className="ft-p-medium clr--gray">Reference NO</th>
-            <th className="ft-p-medium clr--gray">Details</th>
-            <th className="ft-p-medium clr--gray">Amount</th>
+            <th className="ft-txt-medium clr--gray">Date</th>
+            <th className="ft-txt-medium clr--gray">Reference NO</th>
+            <th className="ft-txt-medium clr--gray">Details</th>
+            <th className="ft-txt-medium clr--gray">Amount</th>
           </tr>
         </thead>
         <tbody className="table-body">

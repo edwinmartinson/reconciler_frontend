@@ -4,7 +4,7 @@ import { Widgets } from "./components/Widgets";
 import Message from "../../components/Message";
 
 import SelectedTable from "./components/SelectedTable";
-// import Filters from "./components/Filters";
+import Filters from "./components/Filters";
 import SelectTable from "./components/SelectTable";
 import { useTrans, useTransStream } from "../../hooks/useTrans";
 import useIssues from "../../hooks/useIssues";
@@ -16,7 +16,7 @@ function Issues() {
   return ledgerId !== "000000000000" ? (
     <main className="main">
       <Widgets />
-      {/* <Filters /> */}
+      <Filters />
       <Selection />
     </main>
   ) : (

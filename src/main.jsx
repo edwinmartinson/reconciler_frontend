@@ -44,19 +44,19 @@ const router = createBrowserRouter([
     errorElement: <Error />,
   },
   {
-    path: "/config",
+    path: "/archive",
     element: (
       <AppWrapper hideHeader={false}>
-        <Dev page={"Config"} />
+        <Dev page={"Archive"} />
       </AppWrapper>
     ),
     errorElement: <Error />,
   },
   {
-    path: "/logs",
+    path: "/config",
     element: (
       <AppWrapper hideHeader={false}>
-        <Dev page={"Logs"} />
+        <Dev page={"Config"} />
       </AppWrapper>
     ),
     errorElement: <Error />,

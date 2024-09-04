@@ -26,8 +26,8 @@ export default function Header() {
             <div className="navlinks">
               <NavLink label={"Source"} path={"/source"} />
               <NavLink label={"Issues"} path={"/issues"} />
+              <NavLink label={"Archive"} path={"/archive"} />
               <NavLink label={"Config"} path={"/config"} />
-              <NavLink label={"Logs"} path={"/logs"} />
             </div>
           </div>
         </nav>

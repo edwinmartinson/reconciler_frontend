@@ -121,10 +121,10 @@ export default function SelectTable({ source, isEmpty, transArr }) {
                 {/* <CheckBox /> */}
                 Check
               </th>
-              <th className="ft-p-medium clr--gray">Date</th>
-              <th className="ft-p-medium clr--gray">Ref</th>
-              <th className="ft-p-medium clr--gray">Details</th>
-              <th className="ft-p-medium clr--gray">Amount</th>
+              <th className="ft-txt-medium clr--gray">Date</th>
+              <th className="ft-txt-medium clr--gray">Ref</th>
+              <th className="ft-txt-medium clr--gray">Details</th>
+              <th className="ft-txt-medium clr--gray">Amount</th>
             </tr>
           </thead>
 
