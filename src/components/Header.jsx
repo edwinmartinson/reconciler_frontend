@@ -24,6 +24,7 @@ export default function Header() {
             <ConnectionStatus />
 
             <div className="navlinks">
+              <NavLink label={"Home"} path={"/home"} />
               <NavLink label={"Source"} path={"/source"} />
               <NavLink label={"Issues"} path={"/issues"} />
               <NavLink label={"Archive"} path={"/archive"} />

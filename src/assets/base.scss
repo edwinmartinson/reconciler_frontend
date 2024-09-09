@@ -41,6 +41,10 @@
         color: var(--clr-black-100);
     }
 
+    &--black {
+        color: var(--clr-black-300)
+    }
+
     &--accent {
         color: var(--clr-primary-400);
     }

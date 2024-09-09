@@ -14,6 +14,7 @@ import Issues from "./pages/Issues/Issues";
 import U404 from "./pages/Utility/404";
 import Error from "./pages/Utility/Error";
 import Dev from "./pages/Utility/Dev";
+import Home from "./pages/Home/Home";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,15 @@ const router = createBrowserRouter([
     element: (
       <AppWrapper hideHeader={false}>
         <Dev page={"Login"} />
+      </AppWrapper>
+    ),
+    errorElement: <Error />,
+  },
+  {
+    path: "/home",
+    element: (
+      <AppWrapper hideHeader={false}>
+        <Home />
       </AppWrapper>
     ),
     errorElement: <Error />,

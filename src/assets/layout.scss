@@ -34,6 +34,12 @@ a {
 
     position: relative;
 
+    &.home {
+        margin: 36px auto 0px auto;
+        max-width: 1158px;
+        gap: 34px;
+    }
+
     &.center {
         align-items: center;
         justify-content: center;

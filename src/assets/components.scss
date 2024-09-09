@@ -810,3 +810,25 @@
 }
 
 /* -------------------------------------------------- */
+
+// Home.jsx
+
+.welcome {
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+}
+
+.home-widget {
+    display: grid;
+    grid-template-columns: 336px auto;
+    column-gap: 16px;
+
+    &__recents {
+        height: 632px;
+
+        border-radius: 8px;
+        border: 1px solid var(--clr-black-000);
+        background: var(--clr-white-100, #FFF);
+    }
+}
