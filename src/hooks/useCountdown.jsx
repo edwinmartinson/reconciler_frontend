@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getEndpoint } from "../utils/getEndpoint";
+import { getEndpoint } from "../utils/endpoint.utils";
 
 function useCountdown() {
   const [timeLeft, setTimeLeft] = useState("00hrs 00min 00s");

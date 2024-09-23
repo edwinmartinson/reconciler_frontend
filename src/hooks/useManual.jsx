@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
-import { getEndpoint } from "../utils/getEndpoint";
+import { getEndpoint } from "../utils/endpoint.utils";
 
 function useManual() {
   const { state, dispatch } = useContext(AppContext);
@@ -9,11 +9,12 @@ function useManual() {
   const [resolved, setResolved] = useState(false);
 
   const issues = state.issues;
+  const coreTransIds = issues.selectedCoreTrans.map((trans) => trans.id);
+  const partyTransIds = issues.selectedPartyTrans.map((trans) => trans.id);
 
   const manualObj = {
     ledgerId: state.ledgerId,
-    coreRef: issues.coreRef,
-    transIds: [...issues.selectedCoreTrans, ...issues.selectedPartyTrans],
+    transIds: [...coreTransIds, ...partyTransIds],
   };
 
   async function sendTrans() {
@@ -52,6 +53,10 @@ function useManual() {
       dispatch({ type: "updateLoader", payload: false });
     }
   }
+
+  // function sendTrans() {
+  //   console.log(manualObj);
+  // }
 
   return { error, message, resolved, sendTrans };
 }

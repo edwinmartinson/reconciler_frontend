@@ -1,20 +1,29 @@
 import { createContext, useReducer } from "react";
+import today from "../utils/today.utils";
 
 const initialState = {
+  changeTime: 0,
   ledgerId: "000000000000",
+  transType: "az",
+  startDate: "2018-01-01",
+  endDate: today("date"),
   isConnected: false,
   isCoreImportActive: false,
   isPartyImportActive: false,
   isReconActive: false,
   isAutoReconActive: false,
   showAppLoader: false,
+  showSysToast: false,
   issues: {
+    showModal: false,
     selectedCoreTrans: [],
     selectedPartyTrans: [],
     coreTotal: 0,
     partyTotal: 0,
     count: 0,
-    coreRef: "",
+    action: function () {
+      console.log("Manual recon action");
+    },
   },
   dialog: {
     show: false,
@@ -75,6 +84,48 @@ const reducer = (state, action) => {
           ...state.issues,
           ...action.payload,
         },
+      };
+    }
+
+    case "updateTransState": {
+      return {
+        ...state,
+        transState: action.payload,
+      };
+    }
+
+    case "updateTransType": {
+      return {
+        ...state,
+        transType: action.payload,
+      };
+    }
+
+    case "updateStartDate": {
+      return {
+        ...state,
+        startDate: action.payload,
+      };
+    }
+
+    case "updateEndDate": {
+      return {
+        ...state,
+        endDate: action.payload,
+      };
+    }
+
+    case "updateChangeTime": {
+      return {
+        ...state,
+        changeTime: action.payload,
+      };
+    }
+
+    case "updateChangeInState": {
+      return {
+        ...state,
+        changeInState: action.payload,
       };
     }
 

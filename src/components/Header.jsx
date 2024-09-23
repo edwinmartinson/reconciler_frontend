@@ -5,30 +5,54 @@ import { AppContext } from "../context/AppContext";
 import useAccounts from "../hooks/useAccounts";
 import useConnect from "../hooks/useConnect";
 import useAppStateSteam from "../hooks/useAppState";
+import { SelectField } from "./Fields";
 
 export default function Header() {
+  const { state, dispatch } = useContext(AppContext);
   const { accts } = useAccounts();
+  const acctId = state.ledgerId;
 
   useConnect();
   useAppStateSteam();
+
+  const handleChange = (value) => {
+    dispatch({
+      type: "updateLedgerId",
+      payload: value,
+    });
+  };
 
   return (
     <>
       <header className="header">
         <nav className="nav">
           <Title>
-            <SelectField accts={accts} />
+            <SelectField
+              classes="field__row width-300 field__bg-fff"
+              handleValue={handleChange}
+              defaultValue={acctId}
+            >
+              <option value="000000000000">
+                000000000000 - select an account
+              </option>
+              {accts?.map((acct, index) => (
+                <option key={index} value={acct.ledgerId}>
+                  {`${acct.ledgerId} - ${acct.alias} - ${acct.currencyCode}`}
+                </option>
+              ))}
+            </SelectField>
           </Title>
 
           <div className="wrapper">
             <ConnectionStatus />
 
             <div className="navlinks">
-              <NavLink label={"Home"} path={"/home"} />
-              <NavLink label={"Source"} path={"/source"} />
-              <NavLink label={"Issues"} path={"/issues"} />
-              <NavLink label={"Archive"} path={"/archive"} />
+              <NavLink label={"Dashboard"} path={"/dashboard"} />
+              <NavLink label={"Pending"} path={"/pending"} />
+              <NavLink label={"Outstanding"} path={"/outstanding"} />
+              <NavLink label={"Reconciled"} path={"/reconciled"} />
               <NavLink label={"Config"} path={"/config"} />
+              {/* <NavLink label={"Report"} path={"/report"} /> */}
             </div>
           </div>
         </nav>
@@ -64,7 +88,7 @@ function NavLink({ label, path }) {
   );
 }
 
-function SelectField({ accts }) {
+function OldSelectField({ accts }) {
   const { state, dispatch } = useContext(AppContext);
   const acctId = state.ledgerId;
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getEndpoint } from "./../utils/getEndpoint";
+import { getEndpoint } from "../utils/endpoint.utils";
 
 export default function useAccounts() {
   const [accts, setAccts] = useState([]);

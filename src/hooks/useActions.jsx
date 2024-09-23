@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { getEndpoint } from "./../utils/getEndpoint";
+import { getEndpoint } from "./../utils/endpoint.utils";
 import { AppContext } from "../context/AppContext";
 
 /**

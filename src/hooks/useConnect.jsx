@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
-import { getEndpoint } from "../utils/getEndpoint";
+import { getEndpoint } from "../utils/endpoint.utils";
 import { AppContext } from "../context/AppContext";
 
 function useConnect() {

@@ -8,13 +8,13 @@ import "./assets/typography.scss";
 import "./assets/layout.scss";
 import "./assets/components.scss";
 
-import AppWrapper from "./AppWrapper";
-import Source from "./pages/Source/Source";
-import Issues from "./pages/Issues/Issues";
-import U404 from "./pages/Utility/404";
-import Error from "./pages/Utility/Error";
-import Dev from "./pages/Utility/Dev";
-import Home from "./pages/Home/Home";
+import AppWrapper from "./components/AppWrapper";
+import Manual from "./pages/Manual";
+import U404 from "./pages/404";
+import Error from "./pages/Error";
+import Dev from "./pages/Dev";
+import Trans from "./pages/Trans";
+import Dashboard from "./pages/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -27,37 +27,37 @@ const router = createBrowserRouter([
     errorElement: <Error />,
   },
   {
-    path: "/home",
+    path: "/dashboard",
     element: (
       <AppWrapper hideHeader={false}>
-        <Home />
+        <Dashboard />
       </AppWrapper>
     ),
     errorElement: <Error />,
   },
   {
-    path: "/source",
+    path: "/pending",
     element: (
       <AppWrapper hideHeader={false}>
-        <Source />
+        <Trans key={"pending"} transState={"source"} />
       </AppWrapper>
     ),
     errorElement: <Error />,
   },
   {
-    path: "/issues",
+    path: "/outstanding",
     element: (
       <AppWrapper hideHeader={false}>
-        <Issues />
+        <Manual />
       </AppWrapper>
     ),
     errorElement: <Error />,
   },
   {
-    path: "/archive",
+    path: "/reconciled",
     element: (
       <AppWrapper hideHeader={false}>
-        <Dev page={"Archive"} />
+        <Trans key={"reconciled"} transState={"archive"} />
       </AppWrapper>
     ),
     errorElement: <Error />,
@@ -67,6 +67,15 @@ const router = createBrowserRouter([
     element: (
       <AppWrapper hideHeader={false}>
         <Dev page={"Config"} />
+      </AppWrapper>
+    ),
+    errorElement: <Error />,
+  },
+  {
+    path: "/report",
+    element: (
+      <AppWrapper hideHeader={false}>
+        <Dev page={"Report"} />
       </AppWrapper>
     ),
     errorElement: <Error />,
