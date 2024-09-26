@@ -5,12 +5,13 @@ import Message from "../components/Message";
 import useCountdown from "../hooks/useCountdown";
 import { useTransStream } from "../hooks/useTrans";
 import formatAmount from "../utils/format.utils";
+import today from "../utils/today.utils";
 
 function Dashboard() {
   const { state } = useContext(AppContext);
   const ledgerId = state.ledgerId;
   const startDate = "2018-01-01";
-  const endDate = state.endDate;
+  const endDate = today("date");
 
   // Hooks
   const [timeLeft] = useCountdown();
@@ -40,13 +41,36 @@ function Dashboard() {
       />
 
       <StatsWidgetXL
+        isLoaded={archiveLoaded}
+        label={"Reconciled"}
+        desc={"Showing metrics about reconciled transactions"}
+        data={[
+          { label: "Core count", value: archiveStats?.coreCount || "0" },
+          { label: "Party count", value: archiveStats?.partyCount || "0" },
+          { label: "Total count", value: archiveStats?.totalCount || "0" },
+          {
+            label: "Core total",
+            value: formatAmount(archiveStats?.coreTotal || 0.0),
+          },
+          {
+            label: "Party total",
+            value: formatAmount(archiveStats?.partyTotal || 0.0),
+          },
+          {
+            label: "Balance",
+            value: formatAmount(archiveStats?.balance || 0.0),
+          },
+        ]}
+      />
+
+      <StatsWidgetXL
         isLoaded={sourceLoaded}
         label={"Pending"}
         desc={"Showing metrics about pending transactions"}
         data={[
-          { label: "Core count", value: sourceStats?.coreCount || "00" },
-          { label: "Party count", value: sourceStats?.partyCount || "00" },
-          { label: "Total count", value: sourceStats?.totalCount || "00" },
+          { label: "Core count", value: sourceStats?.coreCount || "0" },
+          { label: "Party count", value: sourceStats?.partyCount || "0" },
+          { label: "Total count", value: sourceStats?.totalCount || "0" },
           {
             label: "Core total",
             value: formatAmount(sourceStats?.coreTotal || 0.0),
@@ -69,13 +93,13 @@ function Dashboard() {
         data={[
           {
             label: "Mismatch count",
-            value: issuesStats?.extraData.mmCount || "00",
+            value: issuesStats?.extraData.mmCount || "0",
           },
           {
             label: "Partial count",
-            value: issuesStats?.extraData.pmCount || "00",
+            value: issuesStats?.extraData.pmCount || "0",
           },
-          { label: "Total count", value: issuesStats?.totalCount || "00" },
+          { label: "Total count", value: issuesStats?.totalCount || "0" },
           {
             label: "Mismatch total",
             value: formatAmount(issuesStats?.extraData.mmTotal || 0.0),
@@ -87,29 +111,6 @@ function Dashboard() {
           {
             label: "Balance",
             value: formatAmount(issuesStats?.balance || 0.0),
-          },
-        ]}
-      />
-
-      <StatsWidgetXL
-        isLoaded={archiveLoaded}
-        label={"Reconciled"}
-        desc={"Showing metrics about reconciled transactions"}
-        data={[
-          { label: "Core count", value: archiveStats?.coreCount || "00" },
-          { label: "Party count", value: archiveStats?.partyCount || "00" },
-          { label: "Total count", value: archiveStats?.totalCount || "00" },
-          {
-            label: "Core total",
-            value: formatAmount(archiveStats?.coreTotal || 0.0),
-          },
-          {
-            label: "Party total",
-            value: formatAmount(archiveStats?.partyTotal || 0.0),
-          },
-          {
-            label: "Balance",
-            value: formatAmount(archiveStats?.balance || 0.0),
           },
         ]}
       />

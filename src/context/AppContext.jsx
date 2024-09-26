@@ -14,6 +14,7 @@ const initialState = {
   isAutoReconActive: false,
   showAppLoader: false,
   showSysToast: false,
+  showBlockScreen: false,
   issues: {
     showModal: false,
     selectedCoreTrans: [],
@@ -27,8 +28,18 @@ const initialState = {
   },
   dialog: {
     show: false,
-    type: "default",
-    hideAction: true,
+    alertType: "default",
+    leftBtn: {
+      show: true,
+      type: "filled",
+      label: "Cancel",
+    },
+    rightBtn: {
+      show: true,
+      type: "outlined",
+      label: "Confirm",
+    },
+    showClose: true,
     title: "This is the title.",
     description: "This is the description of the action dialog",
     action: function () {
@@ -126,6 +137,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         changeInState: action.payload,
+      };
+    }
+
+    case "updateShowBlockScreen": {
+      return {
+        ...state,
+        showBlockScreen: action.payload,
       };
     }
 

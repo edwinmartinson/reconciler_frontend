@@ -237,6 +237,14 @@
             align-items: center;
             gap: 8px;
         }
+
+        &--d {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            align-self: stretch;
+        }
     }
 
     &__buttons {
@@ -449,6 +457,11 @@
 
     &.small {
         height: 8px;
+        padding: 4px;
+    }
+
+    &.small-l {
+        height: 12px;
         padding: 4px;
     }
 

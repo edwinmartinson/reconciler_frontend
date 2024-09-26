@@ -5,17 +5,34 @@ import Message from "../components/Message";
 import { ActionWidget, StatsWidget } from "../components/Widgets";
 import { DataField, FieldContainer, TextField } from "../components/Fields";
 import Table from "../components/Table";
-import { useTrans } from "../hooks/useTrans";
+import { useTrans, useTransStream } from "../hooks/useTrans";
 import useReseter from "../hooks/useReseter";
 import useManual from "../hooks/useManual";
 import useIssues from "../hooks/useIssues";
 import formatAmount from "../utils/format.utils";
+import useDialog from "../hooks/useDialog";
+
+const config = {
+  leftBtn: {
+    show: true,
+    type: "filled",
+    label: "Cancel",
+  },
+  rightBtn: {
+    show: true,
+    type: "outlined",
+    label: "Confirm",
+  },
+  showClose: true,
+};
 
 function Manual() {
   const { state } = useContext(AppContext);
   const ledgerId = state.ledgerId;
   const startDate = state.startDate;
   const endDate = state.endDate;
+
+  useTransStream("issues", startDate, endDate);
 
   return ledgerId !== "000000000000" ? (
     <main className="main">
@@ -49,6 +66,7 @@ export default Manual;
 
 function Widgets() {
   const { state, dispatch } = useContext(AppContext);
+  const { openDialog } = useDialog();
   const { error, message, resolved, sendTrans } = useManual();
   const rester = useReseter("issues");
 
@@ -57,34 +75,39 @@ function Widgets() {
 
   const handleClick = () => {
     if (state.issues.selectedCoreTrans.length === 0) {
-      dispatch({
-        type: "updateDialog",
-        payload: {
-          show: true,
-          type: "error",
-          hideAction: true,
-          title: "Invalid core selection?",
-          description: "Please select at least one core transaction.",
-          action: sendTrans,
+      const extendedConfig = {
+        ...config,
+        rightBtn: {
+          ...config.rightBtn,
+          show: false,
         },
-      });
+        leftBtn: {
+          ...config.leftBtn,
+          label: "close",
+        },
+        title: "Invalid core selection?",
+        description: "Please select at least one core transaction.",
+      };
 
-      return;
+      return openDialog(extendedConfig, "error");
     }
-    if (state.issues.selectedPartyTrans.length === 0) {
-      dispatch({
-        type: "updateDialog",
-        payload: {
-          show: true,
-          type: "error",
-          hideAction: true,
-          title: "Invalid party selection?",
-          description: "Please select at least one party transaction.",
-          action: sendTrans,
-        },
-      });
 
-      return;
+    if (state.issues.selectedPartyTrans.length === 0) {
+      const extendedConfig = {
+        ...config,
+        rightBtn: {
+          ...config.rightBtn,
+          show: false,
+        },
+        leftBtn: {
+          ...config.leftBtn,
+          label: "close",
+        },
+        title: "Invalid party selection?",
+        description: "Please select at least one party transaction.",
+      };
+
+      return openDialog(extendedConfig, "error");
     }
 
     dispatch({

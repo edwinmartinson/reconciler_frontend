@@ -46,9 +46,10 @@ export function useTrans(mode, startDate, endDate, page = 1, from = "core") {
 
   useEffect(() => {
     getTrans();
+    console.log(`Change, Detected. ${new Date().toLocaleTimeString()}`);
 
     // eslint-disable-next-line
-  }, [ledgerId, startDate, endDate, mode, page, from]);
+  }, [ledgerId, startDate, endDate, page, state.changeTime]);
 
   return { error, isLoading, data, getTrans };
 }
@@ -105,7 +106,7 @@ export function useTransStream(mode, startDate, endDate) {
 
         setHasLoaded(true);
         setStats(parsedData?.stats);
-        dispatch({ type: "updateChangeInState", payload: false });
+        // dispatch({ type: "updateChangeInState", payload: false });
       };
 
       eventSource.onerror = (err) => {
