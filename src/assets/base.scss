@@ -20,6 +20,9 @@
     --clr-green-100: #D2F7DF;
     --clr-green-200: #1ED760;
 
+    --clr-yellow-100: #FFF9D2;
+    --clr-yellow-200: #F2E600;
+
     --clr-background: #F9F9F9;
 
     // Border Radius
@@ -86,6 +89,12 @@
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     z-index: 10;
+
+    &.left {
+        padding: 16px;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
 }
 
 .underline {
@@ -94,4 +103,10 @@
 
 .clickable {
     cursor: pointer;
+    user-select: none;
+}
+
+.center-text {
+    text-align: center;
+
 }

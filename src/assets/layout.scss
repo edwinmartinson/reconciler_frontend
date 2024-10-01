@@ -59,6 +59,12 @@ a {
         align-items: flex-start;
         gap: 16px;
     }
+
+    .wrapper--space-between {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 @media screen and (max-width: 1488px) {

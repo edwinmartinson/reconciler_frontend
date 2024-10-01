@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { AppContextProvider } from "./context/AppContext";
+import { ConfigContextProvider } from "./context/ConfigContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./assets/base.scss";
@@ -15,6 +16,7 @@ import Error from "./pages/Error";
 import Dev from "./pages/Dev";
 import Trans from "./pages/Trans";
 import Dashboard from "./pages/Dashboard";
+import Config from "./pages/Config";
 
 const router = createBrowserRouter([
   {
@@ -66,7 +68,7 @@ const router = createBrowserRouter([
     path: "/config",
     element: (
       <AppWrapper hideHeader={false}>
-        <Dev page={"Config"} />
+        <Config />
       </AppWrapper>
     ),
     errorElement: <Error />,
@@ -95,7 +97,9 @@ const root = createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
     <AppContextProvider>
-      <RouterProvider router={router} />
+      <ConfigContextProvider>
+        <RouterProvider router={router} />
+      </ConfigContextProvider>
     </AppContextProvider>
   </StrictMode>
 );

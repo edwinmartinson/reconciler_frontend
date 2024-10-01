@@ -15,6 +15,11 @@ const initialState = {
   showAppLoader: false,
   showSysToast: false,
   showBlockScreen: false,
+  modalStack: [],
+  modelQueue: [
+    { id: 123, payload: { title: "test1" } },
+    { id: 1234, payload: { title: "test2" } },
+  ],
   issues: {
     showModal: false,
     selectedCoreTrans: [],
@@ -144,6 +149,35 @@ const reducer = (state, action) => {
       return {
         ...state,
         showBlockScreen: action.payload,
+      };
+    }
+
+    case "updateModalStack": {
+      return {
+        ...state,
+        modalStack: [action.payload],
+      };
+    }
+
+    case "clearModalStack": {
+      return {
+        ...state,
+        modalStack: [],
+      };
+    }
+
+    case "updateModelQueue": {
+      return {
+        ...state,
+        modelQueue: [...state.modalQueue, action.payload],
+      };
+    }
+
+    case "refreshModelQueue": {
+      const updatedQueue = [...state.modelQueue].slice(1);
+      return {
+        ...state,
+        modelQueue: updatedQueue,
       };
     }
 

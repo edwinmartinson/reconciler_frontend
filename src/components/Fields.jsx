@@ -5,16 +5,26 @@
  * @param {string} props.label - The label to display above the text input.
  * @param {string} props.placeholder - The placeholder text to display in the text input.
  * @param {function(string):void} props.handleValue - A function to call when the input value changes.
+ * @param {boolean} props.disable - A boolean indicating whether the input should be disabled.
  * @returns {ReactElement} A JSX element representing the text input component.
  */
-export function TextField({ classes, label, placeholder, handleValue }) {
+export function TextField({
+  classes,
+  label,
+  placeholder,
+  handleValue,
+  disable = false,
+  value,
+}) {
   return (
     <label className={`field ${classes}`}>
       <p className="field__label">{label}</p>
       <input
+        disabled={disable}
         className="field__input"
         placeholder={placeholder}
         onChange={(e) => handleValue(e.target.value)}
+        value={value}
       />
     </label>
   );

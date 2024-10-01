@@ -7,7 +7,6 @@ function BlockScreen() {
   const { state, dispatch } = useContext(AppContext);
   const location = useLocation();
   const currentPath = location.pathname;
-  const showBlockScreen = state.showBlockScreen;
 
   // Handles dialog actions when system is busy.
   useEffect(() => {
@@ -30,7 +29,7 @@ function BlockScreen() {
     currentPath,
   ]);
 
-  return showBlockScreen ? (
+  return (
     <div className="dialog__background">
       <div className="dialog">
         {/* Head */}
@@ -54,8 +53,6 @@ function BlockScreen() {
         </div>
       </div>
     </div>
-  ) : (
-    <></>
   );
 }
 

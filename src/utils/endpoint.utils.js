@@ -1,8 +1,3 @@
-/**
- * Returns backend api endpoints
- * @param {"accts" | "trans" | "actions" | "manual" | "trans:stream | "state:stream" | "connect:stream" | "countdown:stream"} key
- * @returns {string}
- */
 export function getEndpoint(key) {
   const endpoint = "http://localhost:3050";
 
@@ -22,6 +17,9 @@ export function getEndpoint(key) {
     case "accts":
       return endpoint + "/api/accts";
 
+    case "currency":
+      return endpoint + "/api/accts/currency";
+
     case "trans":
       return endpoint + "/api/v2/trans";
 
@@ -30,6 +28,9 @@ export function getEndpoint(key) {
 
     case "manual":
       return endpoint + "/api/manual";
+
+    case "ints":
+      return endpoint + "/api/ints";
 
     default:
       return endpoint;

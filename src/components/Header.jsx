@@ -6,21 +6,28 @@ import useAccounts from "../hooks/useAccounts";
 import useConnect from "../hooks/useConnect";
 import useAppStateSteam from "../hooks/useAppState";
 import { SelectField } from "./Fields";
+import { ConfigContext } from "../context/ConfigContext";
 
 export default function Header() {
-  const { state, dispatch } = useContext(AppContext);
-  const { accts } = useAccounts();
-  const acctId = state.ledgerId;
+  const { state: appState, dispatch: appDispatch } = useContext(AppContext);
+  const { state: configState } = useContext(ConfigContext);
+  const { accts, fetchAccts } = useAccounts(true);
+  const acctId = appState.ledgerId;
 
   useConnect();
   useAppStateSteam();
 
   const handleChange = (value) => {
-    dispatch({
+    appDispatch({
       type: "updateLedgerId",
       payload: value,
     });
   };
+
+  useEffect(() => {
+    fetchAccts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [configState.changeTime]);
 
   return (
     <>

@@ -1,9 +1,9 @@
-function Button({ type, actions, children }) {
+function Button({ type = "filled", actions, classes, children }) {
   switch (type) {
     case "filled":
       return (
         <div
-          className="button filled"
+          className={"button filled " + classes}
           onClick={() => actions.forEach((action) => action.call())}
         >
           <p className="ft-p-medium">{children}</p>
@@ -13,7 +13,7 @@ function Button({ type, actions, children }) {
     case "outlined":
       return (
         <div
-          className="button outlined"
+          className={"button outlined" + classes}
           onClick={() => actions.forEach((action) => action.call())}
         >
           <p className="ft-p-medium">{children}</p>

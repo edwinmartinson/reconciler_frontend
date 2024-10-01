@@ -12,7 +12,7 @@ function ActionDialog() {
   const leftBtn = dialog.leftBtn;
   const rightBtn = dialog.rightBtn;
 
-  return dialog.show ? (
+  return (
     <div className="dialog__background">
       <div className="dialog">
         {/* Wrapper */}
@@ -49,8 +49,6 @@ function ActionDialog() {
         </div>
       </div>
     </div>
-  ) : (
-    <></>
   );
 }
 
@@ -87,6 +85,20 @@ function ActionDialogPile({ type }) {
       return (
         <div className="dialog_pile alert">
           <p className="ft-p-medium">Alert</p>
+        </div>
+      );
+
+    case "warn":
+      return (
+        <div className="dialog_pile warn">
+          <p className="ft-p-medium">Warning</p>
+        </div>
+      );
+
+    case "danger":
+      return (
+        <div className="dialog_pile danger">
+          <p className="ft-p-medium">Danger</p>
         </div>
       );
 

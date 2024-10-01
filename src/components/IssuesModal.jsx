@@ -6,7 +6,6 @@ import formatAmount from "../utils/format.utils";
 function IssuesModal() {
   const { state, dispatch } = useContext(AppContext);
 
-  const showIssueModal = state.issues.showModal;
   const coreTotal = state.issues.coreTotal;
   const partyTotal = state.issues.partyTotal;
   const total = parseFloat((coreTotal + partyTotal).toFixed(2));
@@ -22,7 +21,7 @@ function IssuesModal() {
     });
   };
 
-  return showIssueModal ? (
+  return (
     <div className="overlay">
       <div className="issues-modal">
         <div className="wrapper">
@@ -91,8 +90,6 @@ function IssuesModal() {
         </div>
       </div>
     </div>
-  ) : (
-    <></>
   );
 }
 

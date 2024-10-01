@@ -12,27 +12,19 @@ import useIssues from "../hooks/useIssues";
 import formatAmount from "../utils/format.utils";
 import useDialog from "../hooks/useDialog";
 
-const config = {
-  leftBtn: {
-    show: true,
-    type: "filled",
-    label: "Cancel",
-  },
-  rightBtn: {
-    show: true,
-    type: "outlined",
-    label: "Confirm",
-  },
-  showClose: true,
-};
-
 function Manual() {
   const { state } = useContext(AppContext);
+  const rester = useReseter("issues");
   const ledgerId = state.ledgerId;
   const startDate = state.startDate;
   const endDate = state.endDate;
 
   useTransStream("issues", startDate, endDate);
+
+  useEffect(() => {
+    return () => rester();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return ledgerId !== "000000000000" ? (
     <main className="main">
@@ -66,7 +58,7 @@ export default Manual;
 
 function Widgets() {
   const { state, dispatch } = useContext(AppContext);
-  const { openDialog } = useDialog();
+  const { config, openDialog } = useDialog();
   const { error, message, resolved, sendTrans } = useManual();
   const rester = useReseter("issues");
 
@@ -118,32 +110,40 @@ function Widgets() {
 
   const handleRes = (error, message) => {
     if (error) {
-      dispatch({
-        type: "updateDialog",
-        payload: {
-          show: true,
-          type: "error",
-          hideAction: true,
-          title: "Manual recon failed.",
-          description: message,
+      const extendedConfig = {
+        ...config,
+        leftBtn: {
+          ...config.leftBtn,
+          label: "close",
         },
-      });
+        rightBtn: {
+          ...config.rightBtn,
+          show: false,
+        },
+        title: "Manual recon failed.",
+        description: message,
+      };
+
+      return openDialog(extendedConfig, "error");
     }
 
     if (!error) {
-      rester.call();
-
-      dispatch({
-        type: "updateDialog",
-        payload: {
-          show: true,
-          type: "success",
-          hideAction: true,
-          title: "Manual recon successful.",
-          description:
-            "Selected transactions have been successfully reconciled.",
+      const extendedConfig = {
+        ...config,
+        leftBtn: {
+          ...config.leftBtn,
+          label: "close",
         },
-      });
+        rightBtn: {
+          ...config.rightBtn,
+          show: false,
+        },
+        title: "Manual recon successful.",
+        description: message,
+      };
+
+      openDialog(extendedConfig, "success");
+      return rester();
     }
   };
 
