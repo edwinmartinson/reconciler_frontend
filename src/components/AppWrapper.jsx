@@ -17,7 +17,7 @@ import { AppContext } from "../context/AppContext";
 // import useModalEngine from "../hooks/useModalEngine";
 
 function AppWrapper({ hideHeader, children }) {
-  const { state: appState } = useContext(AppContext);
+  const { state: appState, dispatch: appDispatch } = useContext(AppContext);
   const { state: configState } = useContext(ConfigContext);
   const { config, openDialog } = useDialog();
   const [width] = useViewport();
@@ -165,6 +165,27 @@ function AppWrapper({ hideHeader, children }) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [importHasResponded, reconHasResponded, autoHasResponded]);
+
+  // Handles dialog actions when system is busy.
+  useEffect(() => {
+    if (
+      appState.isAutoReconActive === true ||
+      appState.isReconActive === true ||
+      appState.isCoreImportActive === true ||
+      appState.isPartyImportActive === true
+    ) {
+      if (currentPath !== "/") {
+        appDispatch({ type: "updateShowBlockScreen", payload: true });
+      } else appDispatch({ type: "updateShowBlockScreen", payload: false });
+    } else appDispatch({ type: "updateShowBlockScreen", payload: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    appState.isAutoReconActive,
+    appState.isReconActive,
+    appState.isCoreImportActive,
+    appState.isPartyImportActive,
+    currentPath,
+  ]);
 
   // Key bindings
   const disable = currentPath === "/" || currentPath === "/dashboard";
